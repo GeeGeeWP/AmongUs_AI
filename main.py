@@ -183,7 +183,7 @@ if __name__ == '__main__':
     location_info  = ping_location()
     current_location = location_info[0]
     current_room = location_info[1]
-    task = 0
+    task = 1
     # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
     waypoints = navigate(current_room, task)
     for i in range(len(waypoints)):
