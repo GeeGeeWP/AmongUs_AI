@@ -2,10 +2,10 @@ import mss
 import mss.tools
 import pyautogui
 import cv2
-import numpy as np
-from pynput.mouse import Button, Controller
+from pynput.mouse import Controller
 from time import sleep
 import math
+from navigation import navigate, get_a_room
 
 
 def grab_screen():
@@ -14,46 +14,14 @@ def grab_screen():
         img = sct.grab(region)
         mss.tools.to_png(img.rgb, img.size, output='location.png')
 
-def get_a_room(current_location):
-    if current_location[0] < 392:
-        print("Location: Reactor!")
-    elif current_location[0] < 650:
-        if current_location[1] > 1006:
-            print("Location Lower Engines")
-        elif current_location[1] < 561:
-            print("Location Upper Engines")
-            return 3
-        else:
-            print("Hallway!")
-    elif current_location[0] < 827:
-        if current_location[1] < 887:
-            if current_location[1] > 637:
-                print("Location Security")
-            else:
-                print("Location Hallway 3")
-        else:
-            print("Location Hallway 2")
-    elif current_location[0] < 1205:
-        if current_location[1] < 494:
-            print("Location Hallway North")
-        elif current_location[1] < 820:
-            print("Location: MedBay!")
-            return 2
-        elif current_location[1] < 1293:
-            print("Location: ELectrical!")
-        else:
-            print("Location: Hallway!")
-    else:
-        return
 
-def get_waypoints(current_location):
-    pass
+
 
 def calculate_vector(current_location, target_location):
     neutral_vector = (895, 581)
 
-    vector_x = max(min(neutral_vector[0] + target_location[0] - current_location[0], 1195),595)
-    vector_y = max(min(neutral_vector[1] + target_location[1] - current_location[1],881),281)
+    vector_x = max(min(neutral_vector[0] + target_location[0] - current_location[0], 1195), 595)
+    vector_y = max(min(neutral_vector[1] + target_location[1] - current_location[1], 881), 281)
 
     hypotenuse = math.sqrt(
         (target_location[0] - current_location[0]) ** 2 + (target_location[1] - current_location[1]) ** 2)
@@ -64,24 +32,7 @@ def calculate_vector(current_location, target_location):
 def toggle_map():
     # sleep(0.05)
     pyautogui.click(1560, 314, clicks=2)
-    #sleep(0.05)
-
-def navigate(current_room, task):
-    locations = [(1524, 515),(1021, 407),1,1,1,1,1]
-
-    # origin = locations[current_room]
-
-    # from Upper engine
-    if current_room == 3:
-        if task == 1:
-            waypoint = [(632, 525), (646, 398), (1316, 401)]
-        elif task == 2:
-            waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
-
-    elif current_room == 2:
-        waypoint = [(1014, 399), (646, 398), (632, 525)]
-    return waypoint
-
+    # sleep(0.05)
 
 
 def ping_location():
@@ -184,24 +135,25 @@ if __name__ == '__main__':
     current_location = location_info[0]
     print("Now the location is: " + str(current_location))
     current_room = location_info[1]
-    # TODO implement better task system
-    task = 2
-    # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
-    waypoints = navigate(current_room, task)
-    for i in range(len(waypoints)):
-        target_location = waypoints[i]
-        print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(current_location))
-        vector_x, vector_y, distance = calculate_vector(current_location, target_location)
-        move(vector_x, vector_y, distance)
-        if (i % 9) == 0:
-            try:
-                location_info = ping_location()
-                current_location = location_info[0]
-                current_room = location_info[1]
-            except:
-                current_location = waypoints[i]
-        else:
-            current_location = waypoints[i]
+    # # TODO implement better task system
+    # task = 2
+    # # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
+    # waypoints = navigate(current_room, task)
+    # for i in range(len(waypoints)):
+    #     target_location = waypoints[i]
+    #     print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(
+    #         current_location))
+    #     vector_x, vector_y, distance = calculate_vector(current_location, target_location)
+    #     move(vector_x, vector_y, distance)
+    #     if (i % 9) == 0:
+    #         try:
+    #             location_info = ping_location()
+    #             current_location = location_info[0]
+    #             current_room = location_info[1]
+    #         except:
+    #             current_location = waypoints[i]
+    #     else:
+    #         current_location = waypoints[i]
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
