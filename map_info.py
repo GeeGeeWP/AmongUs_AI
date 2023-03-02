@@ -27,3 +27,18 @@ def convert_room_id(current_room):
         return "O2"
     elif current_room == 14:
         return "Admin"
+    elif current_room == 15:
+        return "Hallway: Upper Engine, Lower Engine, Reactor, Security"
+    elif current_room == 16:
+        return "Hallway: Upper Engine, MedBay, Cafeteria"
+    elif current_room == 17:
+        return "Hallway: Cafeteria, Weapons"
+    elif current_room == 18:
+        return "Hallway: Weapons, O2, Navigation, Shields"
+    elif current_room == 19:
+        return "Hallway: Shields, Communication. Storage"
+    elif current_room == 20:
+        return "Hallway: Cafeteria, Admin, Storage"
+    elif current_room == 21:
+        return "Hallway: Lower Engine, Electrical, Storage"
+

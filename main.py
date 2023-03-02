@@ -78,7 +78,7 @@ def ping_location():
         print("Location Fail")
         image = cv2.imread('location.png', cv2.IMREAD_COLOR)
         template = cv2.imread('icon_background.png', cv2.IMREAD_COLOR)
-        toggle_map()
+        # toggle_map()
 
         h, w = template.shape[:2]
         sensitivity = 0.99
