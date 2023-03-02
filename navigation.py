@@ -1,17 +1,64 @@
 def navigate(current_room, task):
-    locations = [(1524, 515),(1021, 407),1,1,1,1,1]
-
-    # origin = locations[current_room]
-
-    # from Upper engine
-    if current_room == 3:
-        if task == 1:
-            waypoint = [(632, 525), (646, 398), (1316, 401)]
-        elif task == 2:
-            waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
-
+    if current_room == 1:
+        pass
     elif current_room == 2:
-        waypoint = [(1014, 399), (646, 398), (632, 525)]
+        if task[0] == 3 or 4 or 11 or 12 or 5:
+            waypoint = [(1018, 510), (986, 402), (625, 404)]
+        else:
+            waypoint = [(1018, 510), (1047, 411), (1220, 412)]
+    elif current_room == 3:
+        if task[0] == 1:
+            waypoint = [(632, 525), (646, 398), (1316, 401)]
+        elif task[0] == 2:
+            waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
+        elif task[0] == 12:
+            pass
+        elif task[0] == 11:
+            pass
+        elif task[0] == 4 or 5 or 6:
+            waypoint = [(631, 517), (541, 529), (537, 1052)]
+    elif current_room == 4:
+        if task[0] == 5:
+            waypoint = [(636, 1049), (637, 1178), (814, 1188), (847, 1346),(988, 1329), (1018, 1189)]
+        pass
+    elif current_room == 5:
+        if task[0] == 4 or 12 or 11 or 2:
+            waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
+        else:
+            waypoint = [(989, 1195), (982, 1342), (1296, 1346)]
+    elif current_room == 6:
+        pass
+    elif current_room == 7:
+        pass
+    elif current_room == 8:
+        pass
+    elif current_room == 9:
+        pass
+    elif current_room == 10:
+        pass
+    elif current_room == 11:
+        pass
+    elif current_room == 12:
+        pass
+    elif current_room == 13:
+        pass
+    elif current_room == 14:
+        pass
+    elif current_room == 15:
+        pass
+    elif current_room == 16:
+        pass
+    elif current_room == 17:
+        pass
+    elif current_room == 18:
+        pass
+    elif current_room == 19:
+        pass
+    elif current_room == 20:
+        pass
+    elif current_room == 21:
+        pass
+
     return waypoint
 
 

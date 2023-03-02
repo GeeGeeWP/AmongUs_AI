@@ -7,6 +7,7 @@ from time import sleep
 import math
 from navigation import navigate, get_a_room
 import map_info
+import tasks
 
 
 def grab_screen():
@@ -129,30 +130,36 @@ if __name__ == '__main__':
     region = {'top': 178, 'left': 181, 'width': 1428, 'height': 808}
 
     # sleep(5)
-    location_info = ping_location()
-    current_location = location_info[0]
-    print("Now the location is: " + str(current_location))
-    current_room = location_info[1]
-    print("Current Room: " + str(map_info.convert_room_id(current_room)))
-    # # TODO implement better task system
-    # task = 2
-    # # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
-    # waypoints = navigate(current_room, task)
-    # for i in range(len(waypoints)):
-    #     target_location = waypoints[i]
-    #     print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(
-    #         current_location))
-    #     vector_x, vector_y, distance = calculate_vector(current_location, target_location)
-    #     move(vector_x, vector_y, distance)
-    #     if (i % 9) == 0:
-    #         try:
-    #             location_info = ping_location()
-    #             current_location = location_info[0]
-    #             current_room = location_info[1]
-    #         except:
+    # location_info = ping_location()
+    # current_location = location_info[0]
+    # current_room = location_info[1]
+    # print("Now the location is: " + str(current_location))
+    #
+    # # # TODO implement better task system
+    # task = [5, 0]
+    # while task[0] != current_room:
+    #     location_info = ping_location()
+    #     # current_location = location_info[0]
+    #     # print("Now the location is: " + str(current_location))
+    #     current_room = location_info[1]
+    #     print("Current Room: " + str(map_info.convert_room_id(current_room)))
+    #     waypoints = navigate(current_room, task)
+    #     for i in range(len(waypoints)):
+    #         target_location = waypoints[i]
+    #         print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(
+    #             current_location))
+    #         vector_x, vector_y, distance = calculate_vector(current_location, target_location)
+    #         move(vector_x, vector_y, distance)
+    #         current_location = target_location
+    #         if (i % 9) == 0:
+    #             try:
+    #                 location_info = ping_location()
+    #                 current_location = location_info[0]
+    #                 current_room = location_info[1]
+    #             except:
+    #                 current_location = waypoints[i]
+    #         else:
     #             current_location = waypoints[i]
-    #     else:
-    #         current_location = waypoints[i]
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
@@ -179,6 +186,7 @@ if __name__ == '__main__':
     # current_location = location_info[0]
     # current_room = location_info[1]
     # get_a_room(current_location)
-    # while True:
-    #     print('The current pointer position is {0}'.format(
-    #         mouse.position))
+    tasks.trigger_task("accept_power")
+    while True:
+        print('The current pointer position is {0}'.format(
+            mouse.position))
