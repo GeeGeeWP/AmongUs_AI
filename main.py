@@ -51,15 +51,7 @@ def get_waypoints(current_location):
 
 def calculate_vector(current_location, target_location):
     neutral_vector = (895, 581)
-    # vector_x = neutral_vector[0] + target_location[0] - current_location[0]
-    # vector_y = neutral_vector[1] + target_location[1] - current_location[1]
 
-    print(neutral_vector[0])
-    print(target_location[0])
-    print(current_location[0])
-    print(type(neutral_vector[0]))
-    print(type(target_location[0]))
-    print(type(current_location[0]))
     vector_x = max(min(neutral_vector[0] + target_location[0] - current_location[0], 1195),595)
     vector_y = max(min(neutral_vector[1] + target_location[1] - current_location[1],881),281)
 
@@ -79,8 +71,15 @@ def navigate(current_room, task):
 
     # origin = locations[current_room]
 
-    # Upper Engine to Medbay
-    waypoint = [(632, 525), (1014, 399), (1013, 743)]
+    # from Upper engine
+    if current_room == 3:
+        if task == 1:
+            waypoint = [(632, 525), (646, 398), (1316, 401)]
+        elif task == 2:
+            waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
+
+    elif current_room == 2:
+        waypoint = [(1014, 399), (646, 398), (632, 525)]
     return waypoint
 
 
@@ -164,8 +163,6 @@ def ping_location():
             if sensitivity < 0.5:
                 return
 
-    print("Current Location is: "+ str(centers[0]))
-    print("Current Room is: " + str(get_a_room(centers[0])))
     return [centers[0], get_a_room(centers[0])]
 
 
@@ -183,32 +180,29 @@ if __name__ == '__main__':
     region = {'top': 178, 'left': 181, 'width': 1428, 'height': 808}
 
     # sleep(5)
-    location_info  = ping_location()
-    print("Location Info is: " + str(location_info))
+    location_info = ping_location()
     current_location = location_info[0]
     print("Now the location is: " + str(current_location))
     current_room = location_info[1]
-    task = 1
+    # TODO implement better task system
+    task = 2
     # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
     waypoints = navigate(current_room, task)
     for i in range(len(waypoints)):
         target_location = waypoints[i]
-        print("Am I the error three? " + str(type(target_location)) + " " + str(i))
         print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(current_location))
         vector_x, vector_y, distance = calculate_vector(current_location, target_location)
         move(vector_x, vector_y, distance)
         if (i % 9) == 0:
             try:
-                location_info  = ping_location()
+                location_info = ping_location()
                 current_location = location_info[0]
                 current_room = location_info[1]
             except:
                 current_location = waypoints[i]
-                print("Am I the error too? " + str(type(current_location)))
         else:
             current_location = waypoints[i]
-            print("Am I the error? "+ str(type(current_location)))
-    #
+
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
     #         current_location = location_info[0]
@@ -230,10 +224,10 @@ if __name__ == '__main__':
     # move(895, 800, 1.9)
     # move(896, 200, 3)
 
-    location_info = ping_location()
-    current_location = location_info[0]
-    current_room = location_info[1]
-    get_a_room(current_location)
+    # location_info = ping_location()
+    # current_location = location_info[0]
+    # current_room = location_info[1]
+    # get_a_room(current_location)
     # while True:
     #     print('The current pointer position is {0}'.format(
     #         mouse.position))
