@@ -6,6 +6,7 @@ from pynput.mouse import Controller
 from time import sleep
 import math
 from navigation import navigate, get_a_room
+import map_info
 
 
 def grab_screen():
@@ -13,8 +14,6 @@ def grab_screen():
         sleep(0.3)
         img = sct.grab(region)
         mss.tools.to_png(img.rgb, img.size, output='location.png')
-
-
 
 
 def calculate_vector(current_location, target_location):
@@ -89,7 +88,6 @@ def ping_location():
         res = cv2.matchTemplate(image, template, method)
         res_h, res_w = res.shape[:2]
 
-        # fake out max_val for first run through loop
         max_val = 1
         centers = []
         while len(centers) == 0:
@@ -135,6 +133,7 @@ if __name__ == '__main__':
     current_location = location_info[0]
     print("Now the location is: " + str(current_location))
     current_room = location_info[1]
+    print("Current Room: " + str(map_info.convert_room_id(current_room)))
     # # TODO implement better task system
     # task = 2
     # # # waypoints = [(1528, 502), (1846, 404), (2183, 428), (2158, 684), (2301, 682), (2301, 865), (2138, 870), (2141, 1179), (1612, 1210), (1563, 1050), (1298, 1152), (1283, 1350), (835, 1350), (835, 1172), (652, 1172), (611, 1052), (540, 1056), (537, 548), (630, 496), (653, 407), (1361, 402)]
