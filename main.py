@@ -129,37 +129,45 @@ if __name__ == '__main__':
     pyautogui.click(1560, 500, clicks=1)
     region = {'top': 178, 'left': 181, 'width': 1428, 'height': 808}
 
-    # sleep(5)
-    # location_info = ping_location()
-    # current_location = location_info[0]
-    # current_room = location_info[1]
-    # print("Now the location is: " + str(current_location))
+    location_info = ping_location()
+    current_location = location_info[0]
+    current_room = location_info[1]
+    print("Current Room: " + str(map_info.convert_room_id(current_room)))
+    print("Now the location is: " + str(current_location))
     #
-    # # # TODO implement better task system
-    # task = [5, 0]
+    # TODO implement better task system
+    task = [5, 0]
     # while task[0] != current_room:
-    #     location_info = ping_location()
-    #     # current_location = location_info[0]
-    #     # print("Now the location is: " + str(current_location))
-    #     current_room = location_info[1]
-    #     print("Current Room: " + str(map_info.convert_room_id(current_room)))
-    #     waypoints = navigate(current_room, task)
-    #     for i in range(len(waypoints)):
-    #         target_location = waypoints[i]
-    #         print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " and we are at " + str(
-    #             current_location))
-    #         vector_x, vector_y, distance = calculate_vector(current_location, target_location)
-    #         move(vector_x, vector_y, distance)
-    #         current_location = target_location
-    #         if (i % 9) == 0:
-    #             try:
-    #                 location_info = ping_location()
-    #                 current_location = location_info[0]
-    #                 current_room = location_info[1]
-    #             except:
-    #                 current_location = waypoints[i]
-    #         else:
-    #             current_location = waypoints[i]
+    x = 1
+    while x ==1:
+
+        waypoints, destination_room, kill = navigate(current_room, task)
+        print("Current Room: " + str(map_info.convert_room_id(current_room)))
+        for i in range(len(waypoints)):
+            target_location = waypoints[i]
+            print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " in " +str(map_info.convert_room_id(destination_room))+ " and we are at " + str(
+                current_location) + " in " + str(map_info.convert_room_id(current_room)))
+            vector_x, vector_y, distance = calculate_vector(current_location, target_location)
+            move(vector_x, vector_y, distance)
+            current_location = target_location
+            current_room = destination_room
+            if kill:
+                print(task)
+                tasks.trigger_task(task)
+                task.pop(0)
+                print(task)
+                x = 0
+
+            # if (i % 9) == 0:
+            #     try:
+            #         location_info = ping_location()
+            #         current_location = location_info[0]
+            #         current_room = location_info[1]
+            #     except:
+            #         current_location = waypoints[i]
+            # else:
+            #     current_location = waypoints[i]
+            print("Current Room: " + str(map_info.convert_room_id(current_room)))
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
@@ -186,7 +194,7 @@ if __name__ == '__main__':
     # current_location = location_info[0]
     # current_room = location_info[1]
     # get_a_room(current_location)
-    tasks.trigger_task("accept_power")
-    while True:
-        print('The current pointer position is {0}'.format(
-            mouse.position))
+    # tasks.trigger_task("accept_power")
+    # while True:
+    #     print('The current pointer position is {0}'.format(
+    #         mouse.position))

@@ -1,31 +1,47 @@
 def navigate(current_room, task):
+    kill = False
     if current_room == 1:
         pass
     elif current_room == 2:
         if task[0] == 3 or 4 or 11 or 12 or 5:
             waypoint = [(1018, 510), (986, 402), (625, 404)]
+            destination = 3
         else:
             waypoint = [(1018, 510), (1047, 411), (1220, 412)]
+            destination = 1
     elif current_room == 3:
         if task[0] == 1:
             waypoint = [(632, 525), (646, 398), (1316, 401)]
+            destination = 4
         elif task[0] == 2:
             waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
+            destination = 2
         elif task[0] == 12:
             pass
         elif task[0] == 11:
             pass
         elif task[0] == 4 or 5 or 6:
             waypoint = [(631, 517), (541, 529), (537, 1052)]
+            destination = 4
     elif current_room == 4:
         if task[0] == 5:
             waypoint = [(636, 1049), (637, 1178), (814, 1188), (847, 1346),(988, 1329), (1018, 1189)]
+            destination = 5
         pass
     elif current_room == 5:
-        if task[0] == 4 or 12 or 11 or 2:
-            waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
+        # if task[0] ==  12 or 11 or 2:
+        #     waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
+        #     destination = 4
+
+        if task[0] == 5:
+            if task[1] == 0:
+                waypoint = [(1156, 1060), (1000, 920)]
+                destination = 5
+                kill = True
+
         else:
-            waypoint = [(989, 1195), (982, 1342), (1296, 1346)]
+            waypoint = [(1156, 1060), (1000, 946)]
+            destination = 5
     elif current_room == 6:
         pass
     elif current_room == 7:
@@ -59,7 +75,7 @@ def navigate(current_room, task):
     elif current_room == 21:
         pass
 
-    return waypoint
+    return waypoint, destination, kill
 
 
 def get_a_room(current_location):
