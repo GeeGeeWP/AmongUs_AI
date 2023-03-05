@@ -1,79 +1,187 @@
+# Done
+navigation = (2603, 750)
+o2 = (1998, 673)
+weapons = (2169, 414)
+shields = (2142, 1172)
+communications = (1854, 1425)
+admin = (1741, 914)
+
+# Work in Progress
+cafeteria = (1524, 525)
+storage = (1500, 1099)
+electrical = (1020, 1199)
+lower_engine = (645, 1183)
+security = (711, 802)
+reactor = (349, 798)
+upper_engine = (645, 410)
+medbay = (1032, 740)
+
+navigation_to_weapons = [(2318, 748), (2248, 668), (2154, 669), (2148, 437), weapons]
+navigation_to_o2 = [(2318, 748), (2248, 668), o2]
+navigation_to_shields = [(2318, 748), (2276, 851), (2169, 884), shields]
+shields_to_communications = [(1884, 1234), communications]
+shields_to_storage = [(2022, 1208), (1605, 1212), (1573, 1104), storage]
+shields_to_o2 = [(2157, 887), (2299, 846), (2289, 684), o2]
+shields_to_weapons = [(2157, 887), (2299, 846), (2289, 684), (2162, 678), (2149, 425), weapons]
+shields_to_navigation = [(2157, 887), (2299, 846), (2303, 759), navigation]
+communications_to_shields = [(1884, 1234), shields]
+weapons_to_cafeteria = [(1776, 405), cafeteria]
+cafeteria_to_weapons = [(1776, 405), (1964, 396), weapons]
+cafeteria_to_admin = [(1540, 906), admin]
+admin_to_cafeteria = [(1540, 906), cafeteria]
+admin_to_storage = [(1540, 906), storage]
+storage_to_shields = [(1590, 1133), (1604, 1218), shields]
+storage_to_communications = [(1590, 1133), (1604, 1218), (1864, 1224), communications]
+storage_to_electrical = [(1408, 1097), (1300, 1164), (1293, 1357), (995, 1350), electrical]
+storage_to_lower_engines = [(1408, 1097), (1300, 1164), (1293, 1357), (860, 1354), (803, 1174), lower_engine]
+lower_engine_to_upper_engine = [(625, 1045), (550, 1059), (534, 539), (635, 501), upper_engine]
+lower_engine_to_reactor = [(625, 1045), (550, 1059), (553, 810), reactor]
+lower_engine_to_security = [(625, 1045), (550, 1059), (553, 810), security]
+upper_engine_to_medbay =[(1016, 413), ]
+upper_engine_to_cafeteria = [(1315, 407), cafeteria]
+weapons_to_shields = [(2149, 425), (2162, 678), (2289, 684),  (2299, 846), (2157, 887), shields]
+o2_to_weapons = [(2143, 671), weapons]
+o2_to_navigation = [(2311, 672), (2300, 762), navigation]
+o2_to_shields = [(2311, 672), (2293, 857), (2156, 859), shields]
+weapons_to_o2 = [(2160, 667), o2]
+weapons_to_navigation = [(2143, 671), (2300, 762), navigation]
+communications_to_storage = [(1889, 1213), (1884, 1234), storage]
+electrical_to_storage = []
+electrical_to_lower_engine = []
+
+
+
 def navigate(current_room, task):
     kill = False
+    waypoint =[]
+    current_room = 1
     if current_room == 1:
-        pass
-    elif current_room == 2:
-        if task[0] == 3 or 4 or 11 or 12 or 5:
-            waypoint = [(1018, 510), (986, 402), (625, 404)]
-            destination = 3
-        else:
-            waypoint = [(1018, 510), (1047, 411), (1220, 412)]
-            destination = 1
-    elif current_room == 3:
-        if task[0] == 1:
-            waypoint = [(632, 525), (646, 398), (1316, 401)]
-            destination = 4
-        elif task[0] == 2:
-            waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
-            destination = 2
-        elif task[0] == 12:
-            pass
-        elif task[0] == 11:
-            pass
-        elif task[0] == 4 or 5 or 6:
-            waypoint = [(631, 517), (541, 529), (537, 1052)]
-            destination = 4
-    elif current_room == 4:
-        if task[0] == 5:
-            waypoint = [(636, 1049), (637, 1178), (814, 1188), (847, 1346),(988, 1329), (1018, 1189)]
-            destination = 5
-        pass
-    elif current_room == 5:
-        # if task[0] ==  12 or 11 or 2:
-        #     waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
-        #     destination = 4
-
-        if task[0] == 5:
-            if task[1] == 0:
-                waypoint = [(1156, 1060), (1000, 920)]
-                destination = 5
-                kill = True
-
-        else:
-            waypoint = [(1156, 1060), (1000, 946)]
-            destination = 5
-    elif current_room == 6:
-        pass
-    elif current_room == 7:
-        pass
-    elif current_room == 8:
-        pass
-    elif current_room == 9:
-        pass
-    elif current_room == 10:
-        pass
-    elif current_room == 11:
-        pass
-    elif current_room == 12:
-        pass
-    elif current_room == 13:
-        pass
-    elif current_room == 14:
-        pass
-    elif current_room == 15:
-        pass
-    elif current_room == 16:
-        pass
-    elif current_room == 17:
-        pass
-    elif current_room == 18:
-        pass
-    elif current_room == 19:
-        pass
-    elif current_room == 20:
-        pass
-    elif current_room == 21:
-        pass
+        for i in cafeteria_to_weapons:
+            waypoint.append(i)
+        for i in weapons_to_o2:
+            waypoint.append(i)
+        for i in o2_to_navigation:
+            waypoint.append(i)
+        for i in navigation_to_shields:
+            waypoint.append(i)
+        for i in shields_to_storage:
+            waypoint.append(i)
+        for i in storage_to_lower_engines:
+            waypoint.append(i)
+        for i in lower_engine_to_upper_engine:
+            waypoint.append(i)
+        for i in upper_engine_to_cafeteria:
+            waypoint.append(i)
+        destination = 7
+    # elif current_room == 2:
+    #     if task[0] == 3 or 4 or 11 or 12 or 5:
+    #         waypoint = [(1018, 510), (986, 402), (625, 404)]
+    #         destination = 3
+    #     else:
+    #         waypoint = [(1018, 510), (1047, 411), (1220, 412)]
+    #         destination = 1
+    # elif current_room == 3:
+    #     waypoint = upper_engine_to_cafeteria
+    #     destination = 1
+    #     # if task[0] == 1:
+    #     #     waypoint = [(632, 525), (646, 398), (1316, 401)]
+    #     #     destination = 4
+    #     # elif task[0] == 2:
+    #     #     waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
+    #     #     destination = 2
+    #     # elif task[0] == 12:
+    #     #     pass
+    #     # elif task[0] == 11:
+    #     #     pass
+    #     # elif task[0] == 4 or 5 or 6:
+    #     #     waypoint = [(631, 517), (541, 529), (537, 1052)]
+    #     #     destination = 4
+    # elif current_room == 4:
+    #     if task[0] == 5:
+    #         waypoint = [(636, 1049), (637, 1178), (814, 1188), (847, 1346),(988, 1329), (1018, 1189)]
+    #         destination = 5
+    #     pass
+    # elif current_room == 5:
+    #     # if task[0] ==  12 or 11 or 2:
+    #     #     waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
+    #     #     destination = 4
+    #
+    #     if task[0] == 5:
+    #         if task[1] == 0:
+    #             waypoint = [(1156, 1060), (1000, 920)]
+    #             destination = 5
+    #             kill = True
+    #
+    #     else:
+    #         waypoint = [(1156, 1060), (1000, 946)]
+    #         destination = 5
+    # elif current_room == 6:
+    #     pass
+    # elif current_room == 7:
+    #     waypoint = communications_to_shields
+    #     destination = 8
+    #     # if task[0] == 8 or 13 or 9 or 10:
+    #     #     waypoint = [(1896, 1220), (2147, 1189)]
+    #     #     destination = 8
+    #     # else:
+    #     #     waypoint = [(1896, 1220), (1609, 1206)]
+    #     #     destination = 6
+    # elif current_room == 8:
+    #     pass
+    # elif current_room == 9:
+    #     if task[0] == 13:
+    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (1992, 669)]
+    #         destination = 13
+    #     elif task[0] == 10:
+    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (2289, 697), (2340, 766), (2564, 757)]
+    #         destination = 10
+    #     elif task[0] == 8 or 7:
+    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (2291, 848), (2175, 884), (2154, 1183)]
+    #         destination = 8
+    #     else:
+    #         waypoint = [(1774, 414)]
+    #         destination = 1
+    # elif current_room == 10:
+    #     print("2340823709j")
+    #     print(task[0])
+    #     if task[0] == 13:
+    #         print("23487987239876")
+    #         waypoint = [(2335, 748), (2267, 673), (1992, 669)]
+    #         destination = 13
+    #     elif task[0] == 9 or 1 or 2 or 3:
+    #         print("8273497826978765")
+    #         print(task[0])
+    #         waypoint = [(2335, 748), (2289, 697), (2153, 641), (2152, 473), (2097, 405)]
+    #         destination = 9
+    #     else:
+    #         print("Moving")
+    #         waypoint = [(2310, 761), (2276, 851), (2158, 883), (2153, 1172)]
+    #         destination = 8
+    # elif current_room == 11:
+    #     pass
+    # elif current_room == 12:
+    #     pass
+    # elif current_room == 13:
+    #     # Done
+    #     if task[0] == 10:
+    #         waypoint = [(2274, 687), (2332, 757), (2561, 767)]
+    #         destination = 10
+    #     elif task[0] == 8 or 7 or 6:
+    #         waypoint = [(2275, 678), (2307, 858), (2160, 872), (2153, 1172)]
+    #         destination = 8
+    #     elif task[0] == 13:
+    #         kill = True
+    #     else:
+    #         waypoint = [(2156, 665), (2144, 427)]
+    #         destination = 9
+    # elif current_room == 14:
+    #     # Done
+    #     if task[0] == 1 or 13 or 9 or 2 or 3 or 10:
+    #         waypoint =[(1536, 898), (1517, 522)]
+    #         destination = 1
+    #     else:
+    #         waypoint = [(1536, 898), (1532, 1085)]
+    #         destination = 6
 
     return waypoint, destination, kill
 

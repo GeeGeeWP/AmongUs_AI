@@ -5,7 +5,7 @@ import cv2
 from pynput.mouse import Controller
 from time import sleep
 import math
-from navigation import navigate, get_a_room
+import navigation
 import map_info
 import tasks
 
@@ -113,7 +113,7 @@ def ping_location():
             if sensitivity < 0.5:
                 return
 
-    return [centers[0], get_a_room(centers[0])]
+    return [centers[0], navigation.get_a_room(centers[0])]
 
 
 def move(vector_x, vector_y, distance):
@@ -136,12 +136,11 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [5, 0]
-    # while task[0] != current_room:
+    task = [8, 0]
     x = 1
     while x ==1:
 
-        waypoints, destination_room, kill = navigate(current_room, task)
+        waypoints, destination_room, kill = navigation.navigate(current_room, task)
         print("Current Room: " + str(map_info.convert_room_id(current_room)))
         for i in range(len(waypoints)):
             target_location = waypoints[i]
@@ -158,16 +157,13 @@ if __name__ == '__main__':
                 print(task)
                 x = 0
 
-            # if (i % 9) == 0:
-            #     try:
-            #         location_info = ping_location()
-            #         current_location = location_info[0]
-            #         current_room = location_info[1]
-            #     except:
-            #         current_location = waypoints[i]
-            # else:
-            #     current_location = waypoints[i]
-            print("Current Room: " + str(map_info.convert_room_id(current_room)))
+            if (i % 9) == 0 and i > 0:
+                location_info = ping_location()
+                current_location = location_info[0]
+                current_room = location_info[1]
+            else:
+                current_location = waypoints[i]
+            # print("Current Room: " + str(map_info.convert_room_id(current_room)))
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
@@ -193,7 +189,7 @@ if __name__ == '__main__':
     # location_info = ping_location()
     # current_location = location_info[0]
     # current_room = location_info[1]
-    # get_a_room(current_location)
+    # navigation.get_a_room(current_location)
     # tasks.trigger_task("accept_power")
     # while True:
     #     print('The current pointer position is {0}'.format(
