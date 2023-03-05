@@ -10,15 +10,15 @@ reactor = (349, 798)
 security = (711, 802)
 shields = (2142, 1172)
 storage = (1500, 1099)
-upper_engine = (645, 410)
+upper_engine = (645, 539)
 weapons = (2169, 414)
 
 admin_to_cafeteria = [(1540, 906), cafeteria]
 admin_to_storage = [(1540, 906), storage]
 cafeteria_to_admin = [(1540, 906), admin]
 cafeteria_to_medbay = [(1335, 399), (1020, 410), medbay]
-cafeteria_to_storage = [storage]
-cafeteria_to_upper_engine = [(1335, 399), (640, 405), lower_engine]
+cafeteria_to_storage = [(1538, 1021), storage]
+cafeteria_to_upper_engine = [(1335, 399), (640, 405), upper_engine]
 cafeteria_to_weapons = [(1776, 405), (1964, 396), weapons]
 communications_to_shields = [(1884, 1234), shields]
 communications_to_storage = [(1889, 1213), (1884, 1234), storage]
@@ -27,38 +27,38 @@ electrical_to_storage = [(999, 1350), (1341, 1350), (1280, 1167), (1517, 1088), 
 lower_engine_to_electrical = [(635, 1180), (833, 1178), (830, 1356), (999, 1350), electrical]
 lower_engine_to_reactor = [(625, 1045), (550, 1059), (553, 810), reactor]
 lower_engine_to_security = [(625, 1045), (550, 1059), (553, 810), security]
-lower_engine_to_storage = []
+lower_engine_to_storage = [(635, 1180), (833, 1178), (830, 1356), (1287, 1352), (1302, 1133), storage]
 lower_engine_to_upper_engine = [(625, 1045), (550, 1059), (534, 539), (635, 501), upper_engine]
-medbay_to_cafeteria = []
-medbay_to_upper_engine = []
+medbay_to_cafeteria = [(1009, 396), (1344, 408), cafeteria]
+medbay_to_upper_engine = [(1009, 396), (622, 398), upper_engine]
 navigation_to_o2 = [(2318, 748), (2248, 668), o2]
 navigation_to_shields = [(2318, 748), (2276, 851), (2169, 884), shields]
 navigation_to_weapons = [(2318, 748), (2248, 668), (2154, 669), (2148, 437), weapons]
 o2_to_navigation = [(2311, 672), (2300, 762), navigation]
 o2_to_shields = [(2311, 672), (2293, 857), (2156, 859), shields]
 o2_to_weapons = [(2143, 671), weapons]
-reactor_to_lower_engine = []
-reactor_to_security = []
-reactor_to_upper_engine = []
-security_to_lower_engine = []
-security_to_reactor = []
-security_to_upper_engine = []
+reactor_to_lower_engine = [(553, 810), (628, 1048), lower_engine]
+reactor_to_security = [security]
+reactor_to_upper_engine = [(553, 810), (536, 515), (636, 532), upper_engine]
+security_to_lower_engine = [(553, 810), (628, 1048), lower_engine]
+security_to_reactor = [reactor]
+security_to_upper_engine = [(553, 810), (536, 515), (636, 532), upper_engine]
 shields_to_communications = [(1884, 1234), communications]
 shields_to_navigation = [(2157, 887), (2299, 846), (2303, 759), navigation]
 shields_to_o2 = [(2157, 887), (2299, 846), (2289, 684), o2]
 shields_to_storage = [(2022, 1208), (1605, 1212), (1573, 1104), storage]
 shields_to_weapons = [(2157, 887), (2299, 846), (2289, 684), (2162, 678), (2149, 425), weapons]
 storage_to_admin = [(1529, 907), admin]
-storage_to_cafeteria = [cafeteria]
+storage_to_cafeteria = [(1538, 1021), cafeteria]
 storage_to_communications = [(1590, 1133), (1604, 1218), (1864, 1224), communications]
 storage_to_electrical = [(1408, 1097), (1300, 1164), (1293, 1357), (995, 1350), electrical]
 storage_to_lower_engines = [(1408, 1097), (1300, 1164), (1293, 1357), (860, 1354), (803, 1174), lower_engine]
 storage_to_shields = [(1590, 1133), (1604, 1218), shields]
 upper_engine_to_cafeteria = [(1315, 407), cafeteria]
-upper_engine_to_lower_engine = []
-upper_engine_to_medbay = [(1016, 413), ]
-upper_engine_to_reactor = []
-upper_engine_to_security = []
+upper_engine_to_lower_engine = [(539, 523), (538, 1083), (628, 1048), lower_engine]
+upper_engine_to_medbay = [(647, 400), (1014, 399), medbay]
+upper_engine_to_reactor = [(539, 523), (543, 803), reactor]
+upper_engine_to_security = [(539, 523), (543, 803), security]
 weapons_to_cafeteria = [(1776, 405), cafeteria]
 weapons_to_navigation = [(2143, 671), (2300, 762), navigation]
 weapons_to_o2 = [(2160, 667), o2]
@@ -69,23 +69,15 @@ def navigate(current_room, task):
     kill = False
     waypoint = []
     current_room = 1
-    for i in cafeteria_to_weapons:
+    for i in cafeteria_to_upper_engine:
         waypoint.append(i)
-    for i in weapons_to_o2:
+    for i in upper_engine_to_security:
         waypoint.append(i)
-    for i in o2_to_navigation:
+    for i in security_to_reactor:
         waypoint.append(i)
-    for i in navigation_to_shields:
+    for i in reactor_to_lower_engine:
         waypoint.append(i)
-    for i in shields_to_storage:
-        waypoint.append(i)
-    for i in storage_to_lower_engines:
-        waypoint.append(i)
-    for i in lower_engine_to_upper_engine:
-        waypoint.append(i)
-    for i in upper_engine_to_cafeteria:
-        waypoint.append(i)
-        destination = 7
+    destination = 7
     # elif current_room == 2:
     #     if task[0] == 3 or 4 or 11 or 12 or 5:
     #         waypoint = [(1018, 510), (986, 402), (625, 404)]
