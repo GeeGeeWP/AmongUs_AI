@@ -67,213 +67,241 @@ weapons_to_shields = [(2149, 425), (2162, 678), (2289, 684), (2299, 846), (2157,
 
 def navigate(current_room, task):
     kill = False
-    if current_room == admin:
-        if task[0] == admin:
+    print("Room: " + str(current_room))
+    if current_room == 14:
+        print("Room: " + str(current_room))
+        if task[0] == 14:
             print("Figure out the tasks")
             kill = True
             pass
-        elif task[0] == storage or shields or electrical or lower_engine:
+        elif task[0] == 6 or 8 or 5 or 4:
+            print("Going to Storage")
             waypoint = admin_to_storage
-            destination = storage
+            destination = 6
         else:
             waypoint = admin_to_cafeteria
-            destination = cafeteria
-    elif current_room == cafeteria:
-        if task[0] == cafeteria:
+            print("Going to Cafeteria")
+            destination = 1
+    elif current_room == 1:
+        if task[0] == 1:
             print("Figure out the tasks")
             kill = True
             pass
-        elif task[0] == weapons or o2 or navigation or shields:
+        elif task[0] == 9 or 13 or 10 or 8:
+            print("Going to Weapons")
             waypoint = cafeteria_to_weapons
-            destination = weapons
-        elif task[0] == storage or shields or electrical or lower_engine:
+            destination = 9
+        elif task[0] == 6 or 8 or 5 or 4:
+            print("Going to storage")
             waypoint = cafeteria_to_storage
-            destination = storage
-        elif task[0] == admin:
+            destination = 6
+        elif task[0] == 14:
+            print("Going to Admin")
             waypoint = cafeteria_to_admin
-            destination = admin
-        elif task[0] == medbay:
+            destination = 14
+        elif task[0] == 2:
+            print("Going to Medbay")
             waypoint = cafeteria_to_medbay
-            destination = medbay
+            destination = 2
         else:
             waypoint = cafeteria_to_upper_engine
-            destination = upper_engine
-    elif current_room == communications:
-        if task[0] == communications:
+            print("Going to upper engine")
+            destination = 3
+    elif current_room == 7:
+        if task[0] == 7:
             print("Figure out the tasks")
             kill = True
             pass
-        elif task[0] == shields or navigation or o2:
+        elif task[0] == 8 or 10 or 13:
+            print("Going to Shields")
             waypoint = communications_to_shields
-            destination = shields
+            destination = 8
         else:
+            print("Going to storage")
             waypoint = communications_to_storage
-            destination = storage
-    elif current_room == electrical:
-        if task[0] == electrical:
+            destination = 6
+    elif current_room == 5:
+        if task[0] == 5:
             pass
-        elif task[0] == lower_engine or reactor or security or upper_engine or medbay:
+        elif task[0] == 4 or 11 or 12 or 3 or 2:
+            print("Going to lower engine")
             waypoint = electrical_to_lower_engine
-            destination = lower_engine
+            destination = 4
         else:
+            print("Going to storage")
             waypoint = electrical_to_storage
-            destination = storage
-    elif current_room == lower_engine:
+            destination = 6
+    elif current_room == 4:
         if task[0] == current_room:
             pass
-        elif task[0] == upper_engine or medbay:
+        elif task[0] == 3 or 2:
+            print("Going to upper engine")
             waypoint = lower_engine_to_upper_engine
             destination = upper_engine
-        elif task[0] == security:
+        elif task[0] == 12:
+            print("Going to security")
             waypoint = lower_engine_to_security
-            destination = security
-        elif task[0] == reactor:
+            destination = 12
+        elif task[0] == 11:
+            print("Going to reactor")
             waypoint = lower_engine_to_reactor
-            destination = reactor
-        elif task[0] == electrical:
+            destination = 11
+        elif task[0] == 5:
+            print("Going to electrical")
             waypoint = lower_engine_to_electrical
-            destination = electrical
+            destination = 5
         else:
+            print("Going to storage")
             waypoint = lower_engine_to_storage
-            destination = storage
-    elif current_room == medbay:
+            destination = 6
+    elif current_room == 2:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == upper_engine or security or reactor or lower_engine or electrical:
+        elif task[0] == 3 or 12 or 11 or 4 or 5:
+            print("Going to upper engine")
             waypoint = medbay_to_upper_engine
-            destination = upper_engine
+            destination = 3
         else:
+            print("Goign to cafeteria")
             waypoint = medbay_to_cafeteria
-            destination = cafeteria
-    elif current_room == navigation:
+            destination = 1
+    elif current_room == 10:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == o2:
+        elif task[0] == 13:
+            print("Going to o2")
             waypoint = navigation_to_o2
-            destination = o2
-        elif task[0] == admin or shields or storage or communications or electrical or lower_engine:
+            destination = 13
+        elif task[0] == 14 or 8 or 6 or 7 or 5 or 4:
+            print("Goignto shields")
             waypoint = navigation_to_shields
-            destination = shields
+            destination = 8
         else:
             waypoint = navigation_to_weapons
-            destination = weapons
-    elif current_room == o2:
+            destination = 9
+    elif current_room == 13:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == navigation:
+        elif task[0] == 10:
             waypoint = o2_to_navigation
-            destination = navigation
-        elif task[0] == shields or communications or storage:
+            destination = 10
+        elif task[0] == 8 or 7 or 6:
             waypoint = o2_to_shields
-            destination = shields
+            destination = 8
         else:
             waypoint = o2_to_weapons
-            destination = weapons
-    elif current_room == reactor:
+            destination = 9
+    elif current_room == 11:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == security:
+        elif task[0] == 12:
             waypoint = reactor_to_security
-            destination = security
-        elif task[0] == lower_engine or electrical or storage or communications or admin:
+            destination = 12
+        elif task[0] == 4 or 5 or 6 or 7 or 14:
             waypoint = reactor_to_lower_engine
-            destination = lower_engine
+            destination = 4
         else:
             waypoint = reactor_to_upper_engine
-            destination = upper_engine
-    elif current_room == security:
+            destination = 3
+    elif current_room == 12:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == reactor:
+        elif task[0] == 11:
             waypoint = security_to_reactor
-            destination = reactor
-        elif task[0] == lower_engine or electrical or storage or communications or admin:
+            destination = 11
+        elif task[0] == 4 or 5 or 6 or 7 or 14:
             waypoint = security_to_lower_engine
-            destination = lower_engine
+            destination = 4
         else:
             waypoint = security_to_upper_engine
-            destination = upper_engine
-    elif task[0] == shields:
+            destination = 3
+    elif current_room == 8:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == navigation:
+        elif task[0] == 10:
             waypoint = shields_to_navigation
-            destination = navigation
-        elif task[0] == o2:
+            destination = 10
+        elif task[0] == 13:
             waypoint = shields_to_o2
-            destination = o2
-        elif task[0] == communications:
+            destination = 13
+        elif task[0] == 7:
             waypoint = shields_to_communications
-            destination = communications
-        elif task[0] == weapons or communications:
+            destination = 7
+        elif task[0] == 9 or 7:
             waypoint = shields_to_weapons
-            destination = weapons
+            destination = 9
         else:
             waypoint = shields_to_storage
-            destination = storage
-    elif current_room == storage:
+            destination = 6
+    elif current_room == 6:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == admin:
+        elif task[0] == 14:
+            print("Goign to admin")
             waypoint = storage_to_admin
-            destination = admin
-        elif task[0] == communications:
+            destination = 14
+        elif task[0] == 7:
+            print("Goingto communications")
             waypoint = storage_to_communications
-            destination = communications
-        elif task[0] == electrical:
+            destination = 7
+        elif task[0] == 5:
+            print("Goignto electrical")
             waypoint = storage_to_electrical
-            destination = electrical
-        elif task[0] == shields or navigation or o2:
+            destination = 5
+        elif task[0] == 8 or 10 or 13:
+            print("Going to shields")
             waypoint = storage_to_shields
-            destination = shields
-        elif task[0] == cafeteria or medbay:
+            destination = 8
+        elif task[0] == 1 or 2:
+            print("Goignto cafeteria")
             waypoint = storage_to_cafeteria
-            destination = cafeteria
+            destination = 1
         else:
+            print("going to lower engines")
             waypoint = storage_to_lower_engines
-            destination = lower_engine
-    elif current_room == upper_engine:
+            destination = 4
+    elif current_room == 3:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == reactor:
+        elif task[0] == 11:
             waypoint = upper_engine_to_reactor
-            destination = reactor
-        elif task[0] == security:
+            destination = 11
+        elif task[0] == 12:
             waypoint = upper_engine_to_security
-            destination = security
-        elif task[0] == medbay:
+            destination = 12
+        elif task[0] == 2:
             waypoint = upper_engine_to_medbay
-            destination = medbay
-        elif task[0] == lower_engine or electrical:
+            destination = 2
+        elif task[0] == 4 or 5:
             waypoint = upper_engine_to_lower_engine
-            destination = lower_engine
+            destination = 4
         else:
             waypoint = upper_engine_to_cafeteria
-            destination = cafeteria
-    elif current_room == weapons:
+            destination = 1
+    elif current_room == 9:
         if task[0] == current_room:
             kill = True
             pass
-        elif task[0] == o2:
+        elif task[0] == 13:
             waypoint = weapons_to_o2
-            destination = o2
-        elif task[0] == navigation:
+            destination = 13
+        elif task[0] == 10:
             waypoint = weapons_to_navigation
-            destination = navigation
-        elif task[0] == shields:
+            destination = 10
+        elif task[0] == 8:
             waypoint = weapons_to_shields
-            destination = shields
+            destination = 8
         else:
             waypoint = weapons_to_cafeteria
-            destination = cafeteria
+            destination = 1
 
     return waypoint, destination, kill
 

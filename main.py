@@ -136,7 +136,7 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [8, 0]
+    task = [1, 0]
     x = 1
     while x ==1:
 
@@ -150,7 +150,6 @@ if __name__ == '__main__':
             move(vector_x, vector_y, distance)
             current_location = target_location
             current_room = destination_room
-            x=0
             if kill:
                 print(task)
                 # tasks.trigger_task(task)
