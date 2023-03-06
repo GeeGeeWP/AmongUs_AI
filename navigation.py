@@ -67,126 +67,213 @@ weapons_to_shields = [(2149, 425), (2162, 678), (2289, 684), (2299, 846), (2157,
 
 def navigate(current_room, task):
     kill = False
-    waypoint = []
-    current_room = 1
-    for i in cafeteria_to_upper_engine:
-        waypoint.append(i)
-    for i in upper_engine_to_security:
-        waypoint.append(i)
-    for i in security_to_reactor:
-        waypoint.append(i)
-    for i in reactor_to_lower_engine:
-        waypoint.append(i)
-    destination = 7
-    # elif current_room == 2:
-    #     if task[0] == 3 or 4 or 11 or 12 or 5:
-    #         waypoint = [(1018, 510), (986, 402), (625, 404)]
-    #         destination = 3
-    #     else:
-    #         waypoint = [(1018, 510), (1047, 411), (1220, 412)]
-    #         destination = 1
-    # elif current_room == 3:
-    #     waypoint = upper_engine_to_cafeteria
-    #     destination = 1
-    #     # if task[0] == 1:
-    #     #     waypoint = [(632, 525), (646, 398), (1316, 401)]
-    #     #     destination = 4
-    #     # elif task[0] == 2:
-    #     #     waypoint = [(632, 525), (646, 398), (1014, 399), (1013, 743)]
-    #     #     destination = 2
-    #     # elif task[0] == 12:
-    #     #     pass
-    #     # elif task[0] == 11:
-    #     #     pass
-    #     # elif task[0] == 4 or 5 or 6:
-    #     #     waypoint = [(631, 517), (541, 529), (537, 1052)]
-    #     #     destination = 4
-    # elif current_room == 4:
-    #     if task[0] == 5:
-    #         waypoint = [(636, 1049), (637, 1178), (814, 1188), (847, 1346),(988, 1329), (1018, 1189)]
-    #         destination = 5
-    #     pass
-    # elif current_room == 5:
-    #     # if task[0] ==  12 or 11 or 2:
-    #     #     waypoint = [(989, 1195), (982, 1342), (855, 1336), (834, 1180), (656, 1175)]
-    #     #     destination = 4
-    #
-    #     if task[0] == 5:
-    #         if task[1] == 0:
-    #             waypoint = [(1156, 1060), (1000, 920)]
-    #             destination = 5
-    #             kill = True
-    #
-    #     else:
-    #         waypoint = [(1156, 1060), (1000, 946)]
-    #         destination = 5
-    # elif current_room == 6:
-    #     pass
-    # elif current_room == 7:
-    #     waypoint = communications_to_shields
-    #     destination = 8
-    #     # if task[0] == 8 or 13 or 9 or 10:
-    #     #     waypoint = [(1896, 1220), (2147, 1189)]
-    #     #     destination = 8
-    #     # else:
-    #     #     waypoint = [(1896, 1220), (1609, 1206)]
-    #     #     destination = 6
-    # elif current_room == 8:
-    #     pass
-    # elif current_room == 9:
-    #     if task[0] == 13:
-    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (1992, 669)]
-    #         destination = 13
-    #     elif task[0] == 10:
-    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (2289, 697), (2340, 766), (2564, 757)]
-    #         destination = 10
-    #     elif task[0] == 8 or 7:
-    #         waypoint = [(2097, 405), (2152, 473), (2153, 641), (2291, 848), (2175, 884), (2154, 1183)]
-    #         destination = 8
-    #     else:
-    #         waypoint = [(1774, 414)]
-    #         destination = 1
-    # elif current_room == 10:
-    #     print("2340823709j")
-    #     print(task[0])
-    #     if task[0] == 13:
-    #         print("23487987239876")
-    #         waypoint = [(2335, 748), (2267, 673), (1992, 669)]
-    #         destination = 13
-    #     elif task[0] == 9 or 1 or 2 or 3:
-    #         print("8273497826978765")
-    #         print(task[0])
-    #         waypoint = [(2335, 748), (2289, 697), (2153, 641), (2152, 473), (2097, 405)]
-    #         destination = 9
-    #     else:
-    #         print("Moving")
-    #         waypoint = [(2310, 761), (2276, 851), (2158, 883), (2153, 1172)]
-    #         destination = 8
-    # elif current_room == 11:
-    #     pass
-    # elif current_room == 12:
-    #     pass
-    # elif current_room == 13:
-    #     # Done
-    #     if task[0] == 10:
-    #         waypoint = [(2274, 687), (2332, 757), (2561, 767)]
-    #         destination = 10
-    #     elif task[0] == 8 or 7 or 6:
-    #         waypoint = [(2275, 678), (2307, 858), (2160, 872), (2153, 1172)]
-    #         destination = 8
-    #     elif task[0] == 13:
-    #         kill = True
-    #     else:
-    #         waypoint = [(2156, 665), (2144, 427)]
-    #         destination = 9
-    # elif current_room == 14:
-    #     # Done
-    #     if task[0] == 1 or 13 or 9 or 2 or 3 or 10:
-    #         waypoint =[(1536, 898), (1517, 522)]
-    #         destination = 1
-    #     else:
-    #         waypoint = [(1536, 898), (1532, 1085)]
-    #         destination = 6
+    if current_room == admin:
+        if task[0] == admin:
+            print("Figure out the tasks")
+            kill = True
+            pass
+        elif task[0] == storage or shields or electrical or lower_engine:
+            waypoint = admin_to_storage
+            destination = storage
+        else:
+            waypoint = admin_to_cafeteria
+            destination = cafeteria
+    elif current_room == cafeteria:
+        if task[0] == cafeteria:
+            print("Figure out the tasks")
+            kill = True
+            pass
+        elif task[0] == weapons or o2 or navigation or shields:
+            waypoint = cafeteria_to_weapons
+            destination = weapons
+        elif task[0] == storage or shields or electrical or lower_engine:
+            waypoint = cafeteria_to_storage
+            destination = storage
+        elif task[0] == admin:
+            waypoint = cafeteria_to_admin
+            destination = admin
+        elif task[0] == medbay:
+            waypoint = cafeteria_to_medbay
+            destination = medbay
+        else:
+            waypoint = cafeteria_to_upper_engine
+            destination = upper_engine
+    elif current_room == communications:
+        if task[0] == communications:
+            print("Figure out the tasks")
+            kill = True
+            pass
+        elif task[0] == shields or navigation or o2:
+            waypoint = communications_to_shields
+            destination = shields
+        else:
+            waypoint = communications_to_storage
+            destination = storage
+    elif current_room == electrical:
+        if task[0] == electrical:
+            pass
+        elif task[0] == lower_engine or reactor or security or upper_engine or medbay:
+            waypoint = electrical_to_lower_engine
+            destination = lower_engine
+        else:
+            waypoint = electrical_to_storage
+            destination = storage
+    elif current_room == lower_engine:
+        if task[0] == current_room:
+            pass
+        elif task[0] == upper_engine or medbay:
+            waypoint = lower_engine_to_upper_engine
+            destination = upper_engine
+        elif task[0] == security:
+            waypoint = lower_engine_to_security
+            destination = security
+        elif task[0] == reactor:
+            waypoint = lower_engine_to_reactor
+            destination = reactor
+        elif task[0] == electrical:
+            waypoint = lower_engine_to_electrical
+            destination = electrical
+        else:
+            waypoint = lower_engine_to_storage
+            destination = storage
+    elif current_room == medbay:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == upper_engine or security or reactor or lower_engine or electrical:
+            waypoint = medbay_to_upper_engine
+            destination = upper_engine
+        else:
+            waypoint = medbay_to_cafeteria
+            destination = cafeteria
+    elif current_room == navigation:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == o2:
+            waypoint = navigation_to_o2
+            destination = o2
+        elif task[0] == admin or shields or storage or communications or electrical or lower_engine:
+            waypoint = navigation_to_shields
+            destination = shields
+        else:
+            waypoint = navigation_to_weapons
+            destination = weapons
+    elif current_room == o2:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == navigation:
+            waypoint = o2_to_navigation
+            destination = navigation
+        elif task[0] == shields or communications or storage:
+            waypoint = o2_to_shields
+            destination = shields
+        else:
+            waypoint = o2_to_weapons
+            destination = weapons
+    elif current_room == reactor:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == security:
+            waypoint = reactor_to_security
+            destination = security
+        elif task[0] == lower_engine or electrical or storage or communications or admin:
+            waypoint = reactor_to_lower_engine
+            destination = lower_engine
+        else:
+            waypoint = reactor_to_upper_engine
+            destination = upper_engine
+    elif current_room == security:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == reactor:
+            waypoint = security_to_reactor
+            destination = reactor
+        elif task[0] == lower_engine or electrical or storage or communications or admin:
+            waypoint = security_to_lower_engine
+            destination = lower_engine
+        else:
+            waypoint = security_to_upper_engine
+            destination = upper_engine
+    elif task[0] == shields:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == navigation:
+            waypoint = shields_to_navigation
+            destination = navigation
+        elif task[0] == o2:
+            waypoint = shields_to_o2
+            destination = o2
+        elif task[0] == communications:
+            waypoint = shields_to_communications
+            destination = communications
+        elif task[0] == weapons or communications:
+            waypoint = shields_to_weapons
+            destination = weapons
+        else:
+            waypoint = shields_to_storage
+            destination = storage
+    elif current_room == storage:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == admin:
+            waypoint = storage_to_admin
+            destination = admin
+        elif task[0] == communications:
+            waypoint = storage_to_communications
+            destination = communications
+        elif task[0] == electrical:
+            waypoint = storage_to_electrical
+            destination = electrical
+        elif task[0] == shields or navigation or o2:
+            waypoint = storage_to_shields
+            destination = shields
+        elif task[0] == cafeteria or medbay:
+            waypoint = storage_to_cafeteria
+            destination = cafeteria
+        else:
+            waypoint = storage_to_lower_engines
+            destination = lower_engine
+    elif current_room == upper_engine:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == reactor:
+            waypoint = upper_engine_to_reactor
+            destination = reactor
+        elif task[0] == security:
+            waypoint = upper_engine_to_security
+            destination = security
+        elif task[0] == medbay:
+            waypoint = upper_engine_to_medbay
+            destination = medbay
+        elif task[0] == lower_engine or electrical:
+            waypoint = upper_engine_to_lower_engine
+            destination = lower_engine
+        else:
+            waypoint = upper_engine_to_cafeteria
+            destination = cafeteria
+    elif current_room == weapons:
+        if task[0] == current_room:
+            kill = True
+            pass
+        elif task[0] == o2:
+            waypoint = weapons_to_o2
+            destination = o2
+        elif task[0] == navigation:
+            waypoint = weapons_to_navigation
+            destination = navigation
+        elif task[0] == shields:
+            waypoint = weapons_to_shields
+            destination = shields
+        else:
+            waypoint = weapons_to_cafeteria
+            destination = cafeteria
 
     return waypoint, destination, kill
 

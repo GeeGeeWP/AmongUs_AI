@@ -153,7 +153,7 @@ if __name__ == '__main__':
             x=0
             if kill:
                 print(task)
-                tasks.trigger_task(task)
+                # tasks.trigger_task(task)
                 task.pop(0)
                 print(task)
                 x = 0
