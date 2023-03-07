@@ -67,14 +67,14 @@ weapons_to_shields = [(2149, 425), (2162, 678), (2289, 684), (2299, 846), (2157,
 
 def navigate(current_room, task):
     kill = False
+    destination = current_room
+    waypoint = []
     print("Room: " + str(current_room))
     if current_room == 14:
-        print("Room: " + str(current_room))
         if task[0] == 14:
             print("Figure out the tasks")
             kill = True
-            pass
-        elif task[0] == 6 or 8 or 5 or 4:
+        elif task[0] == 6 or task[0] == 8 or task[0] == 5 or task[0] == 4:
             print("Going to Storage")
             waypoint = admin_to_storage
             destination = 6
@@ -86,7 +86,6 @@ def navigate(current_room, task):
         if task[0] == 1:
             print("Figure out the tasks")
             kill = True
-            pass
         if task[0] == 9 or task[0] == 13 or task[0] == 10 or task[0] == 8:
             print("Going to Weapons - 234")
             waypoint = cafeteria_to_weapons
@@ -108,10 +107,9 @@ def navigate(current_room, task):
             print("Going to upper engine")
             destination = 3
     elif current_room == 7:
-        if task[0] == 7:
+        if task[0] == current_room:
             print("Figure out the tasks")
             kill = True
-            pass
         elif task[0] == 8 or task[0] == 10 or task[0] == 13:
             print("Going to Shields")
             waypoint = communications_to_shields
@@ -121,9 +119,9 @@ def navigate(current_room, task):
             waypoint = communications_to_storage
             destination = 6
     elif current_room == 5:
-        if task[0] == 5:
-            pass
-        elif task[0] == 4 or  task[0] == 11 or  task[0] == 12 or  task[0] == 3 or task[0] ==  2:
+        if task[0] == current_room:
+            kill = True
+        elif task[0] == 4 or task[0] == 11 or task[0] == 12 or task[0] == 3 or task[0] == 2:
             print("Going to lower engine")
             waypoint = electrical_to_lower_engine
             destination = 4
@@ -133,8 +131,8 @@ def navigate(current_room, task):
             destination = 6
     elif current_room == 4:
         if task[0] == current_room:
-            pass
-        elif task[0] == 3 or task[0] ==  2:
+            kill = True
+        elif task[0] == 3 or task[0] == 2:
             print("Going to upper engine")
             waypoint = lower_engine_to_upper_engine
             destination = upper_engine
@@ -157,8 +155,7 @@ def navigate(current_room, task):
     elif current_room == 2:
         if task[0] == current_room:
             kill = True
-            pass
-        elif task[0] == 3 or task[0] ==  12 or  task[0] == 11 or  task[0] == 4 or task[0] ==  5:
+        elif task[0] == 3 or task[0] == 12 or task[0] == 11 or task[0] == 4 or task[0] == 5:
             print("Going to upper engine")
             waypoint = medbay_to_upper_engine
             destination = 3
@@ -169,12 +166,11 @@ def navigate(current_room, task):
     elif current_room == 10:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 13:
             print("Going to o2")
             waypoint = navigation_to_o2
             destination = 13
-        elif task[0] == 14 or task[0] ==  8 or  task[0] == 6 or task[0] ==  7 or  task[0] == 5 or  task[0] == 4:
+        elif task[0] == 14 or task[0] == 8 or task[0] == 6 or task[0] == 7 or task[0] == 5 or task[0] == 4:
             print("Goignto shields")
             waypoint = navigation_to_shields
             destination = 8
@@ -184,11 +180,10 @@ def navigate(current_room, task):
     elif current_room == 13:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 10:
             waypoint = o2_to_navigation
             destination = 10
-        elif task[0] == 8 or  task[0] == 7 or task[0] ==  6:
+        elif task[0] == 8 or task[0] == 7 or task[0] == 6:
             waypoint = o2_to_shields
             destination = 8
         else:
@@ -197,11 +192,10 @@ def navigate(current_room, task):
     elif current_room == 11:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 12:
             waypoint = reactor_to_security
             destination = 12
-        elif task[0] == 4 or task[0] ==  5 or task[0] ==  6 or  task[0] == 7 or task[0] ==  14:
+        elif task[0] == 4 or task[0] == 5 or task[0] == 6 or task[0] == 7 or task[0] == 14:
             waypoint = reactor_to_lower_engine
             destination = 4
         else:
@@ -210,11 +204,10 @@ def navigate(current_room, task):
     elif current_room == 12:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 11:
             waypoint = security_to_reactor
             destination = 11
-        elif task[0] == 4 or task[0] ==  5 or task[0] ==  6 or task[0] ==  7 or task[0] ==  14:
+        elif task[0] == 4 or task[0] == 5 or task[0] == 6 or task[0] == 7 or task[0] == 14:
             waypoint = security_to_lower_engine
             destination = 4
         else:
@@ -223,7 +216,6 @@ def navigate(current_room, task):
     elif current_room == 8:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 10:
             waypoint = shields_to_navigation
             destination = 10
@@ -233,7 +225,7 @@ def navigate(current_room, task):
         elif task[0] == 7:
             waypoint = shields_to_communications
             destination = 7
-        elif task[0] == 9 or  task[0] == 7:
+        elif task[0] == 9 or task[0] == 7:
             waypoint = shields_to_weapons
             destination = 9
         else:
@@ -242,7 +234,6 @@ def navigate(current_room, task):
     elif current_room == 6:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 14:
             print("Goign to admin")
             waypoint = storage_to_admin
@@ -255,11 +246,11 @@ def navigate(current_room, task):
             print("Goignto electrical")
             waypoint = storage_to_electrical
             destination = 5
-        elif task[0] == 8 or task[0] ==  10 or task[0] ==  13:
+        elif task[0] == 8 or task[0] == 10 or task[0] == 13:
             print("Going to shields")
             waypoint = storage_to_shields
             destination = 8
-        elif task[0] == 1 or task[0] ==  2:
+        elif task[0] == 1 or task[0] == 2:
             print("Goignto cafeteria")
             waypoint = storage_to_cafeteria
             destination = 1
@@ -270,7 +261,6 @@ def navigate(current_room, task):
     elif current_room == 3:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 11:
             waypoint = upper_engine_to_reactor
             destination = 11
@@ -280,7 +270,7 @@ def navigate(current_room, task):
         elif task[0] == 2:
             waypoint = upper_engine_to_medbay
             destination = 2
-        elif task[0] == 4 or task[0] ==  5:
+        elif task[0] == 4 or task[0] == 5:
             waypoint = upper_engine_to_lower_engine
             destination = 4
         else:
@@ -289,7 +279,6 @@ def navigate(current_room, task):
     elif current_room == 9:
         if task[0] == current_room:
             kill = True
-            pass
         elif task[0] == 13:
             waypoint = weapons_to_o2
             destination = 13

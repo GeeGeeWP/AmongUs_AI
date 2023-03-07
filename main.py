@@ -136,10 +136,11 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [[2, 0], [1, 0]]
+    task = [[6, 0], [11, 0], [1,0]]
     print(task[0][0])
-    x = 1
-    while x ==1:
+    print(len(task))
+    while (len(task)) > 0:
+        print("Length of the task list: " + str(len(task)))
 
         waypoints, destination_room, kill = navigation.navigate(current_room, task[0])
         print("Current Room: " + str(map_info.convert_room_id(current_room)))
@@ -151,20 +152,17 @@ if __name__ == '__main__':
             move(vector_x, vector_y, distance)
             current_location = target_location
             current_room = destination_room
-            if kill:
-                print(task[0])
-                # tasks.trigger_task(task)
-                task[0].pop(0)
-                print(task)
-                x = 0
+        if kill:
+            # tasks.trigger_task(task)
+            task.pop(0)
 
-            if (i % 9) == 0 and i > 0:
-                location_info = ping_location()
-                current_location = location_info[0]
-                current_room = location_info[1]
-            else:
-                current_location = waypoints[i]
-            print("Current Room: " + str(map_info.convert_room_id(current_room)))
+            # if (i % 9) == 0 and i > 0:
+            #     location_info = ping_location()
+            #     current_location = location_info[0]
+            #     current_room = location_info[1]
+            # else:
+            #     current_location = waypoints[i]
+            # print("Current Room: " + str(map_info.convert_room_id(current_room)))
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
