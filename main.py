@@ -25,7 +25,7 @@ def calculate_vector(current_location, target_location):
 
     hypotenuse = math.sqrt(
         (target_location[0] - current_location[0]) ** 2 + (target_location[1] - current_location[1]) ** 2)
-    distance = (hypotenuse - 17.1) / 152
+    distance = abs((hypotenuse - 17.1) / 152)
     return vector_x, vector_y, distance
 
 
@@ -136,11 +136,12 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [1, 0]
+    task = [[2, 0], [1, 0]]
+    print(task[0][0])
     x = 1
     while x ==1:
 
-        waypoints, destination_room, kill = navigation.navigate(current_room, task)
+        waypoints, destination_room, kill = navigation.navigate(current_room, task[0])
         print("Current Room: " + str(map_info.convert_room_id(current_room)))
         for i in range(len(waypoints)):
             target_location = waypoints[i]
@@ -151,9 +152,9 @@ if __name__ == '__main__':
             current_location = target_location
             current_room = destination_room
             if kill:
-                print(task)
+                print(task[0])
                 # tasks.trigger_task(task)
-                task.pop(0)
+                task[0].pop(0)
                 print(task)
                 x = 0
 
