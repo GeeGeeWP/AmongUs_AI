@@ -136,33 +136,44 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [[6, 0], [11, 0], [1,0]]
-    print(task[0][0])
-    print(len(task))
+    task = [[13, 1], [10, 0]]
+    steps = 0
     while (len(task)) > 0:
         print("Length of the task list: " + str(len(task)))
 
         waypoints, destination_room, kill = navigation.navigate(current_room, task[0])
         print("Current Room: " + str(map_info.convert_room_id(current_room)))
         for i in range(len(waypoints)):
+            steps += 1
+            print("Steps are: " + str(steps))
             target_location = waypoints[i]
-            print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " in " +str(map_info.convert_room_id(destination_room))+ " and we are at " + str(
+            print("New Target for Waypoint #" + str(i) + " is: " + str(waypoints[i]) + " in " + str(
+                map_info.convert_room_id(destination_room)) + " and we are at " + str(
                 current_location) + " in " + str(map_info.convert_room_id(current_room)))
             vector_x, vector_y, distance = calculate_vector(current_location, target_location)
             move(vector_x, vector_y, distance)
             current_location = target_location
             current_room = destination_room
-        if kill:
-            # tasks.trigger_task(task)
-            task.pop(0)
 
-            # if (i % 9) == 0 and i > 0:
-            #     location_info = ping_location()
-            #     current_location = location_info[0]
-            #     current_room = location_info[1]
+            if (steps % 9) == 0 and steps > 0:
+                location_info = ping_location()
+                current_location = location_info[0]
+                current_room = location_info[1]
             # else:
             #     current_location = waypoints[i]
-            # print("Current Room: " + str(map_info.convert_room_id(current_room)))
+            print("Current Room: " + str(map_info.convert_room_id(current_room)))
+
+        if kill:
+            print("Going to Task")
+            target_location = tasks.task_locator(task[0])
+            vector_x, vector_y, distance = calculate_vector(current_location, target_location)
+            move(vector_x, vector_y, distance)
+            current_location = target_location
+            current_room = destination_room
+
+            tasks.trigger_task(task[0])
+            task.pop(0)
+            kill = False
 
     #     while abs(current_location[0] - target_location[0]) > 50:
     #         location_info  = ping_location()
