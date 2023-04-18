@@ -40,6 +40,7 @@ o2_to_weapons = [(2143, 671), weapons]
 reactor_to_lower_engine = [(553, 810), (628, 1048), lower_engine]
 reactor_to_security = [security]
 reactor_to_upper_engine = [(553, 810), (536, 515), (636, 532), upper_engine]
+#Todo security_to_lower_engine needs work
 security_to_lower_engine = [(553, 810), (628, 1048), lower_engine]
 security_to_reactor = [reactor]
 security_to_upper_engine = [(553, 810), (536, 515), (636, 532), upper_engine]
@@ -69,7 +70,7 @@ def navigate(current_room, task):
     kill = False
     destination = current_room
     waypoint = []
-    print("Room: " + str(current_room))
+    #print("Room: " + str(current_room))
     if current_room == 14:
         if task[0] == 14:
             print("Figure out the tasks")

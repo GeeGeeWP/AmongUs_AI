@@ -2,6 +2,7 @@ import mss
 import mss.tools
 import pyautogui
 import cv2
+from pynput import mouse
 from pynput.mouse import Controller
 from time import sleep
 import math
@@ -136,7 +137,7 @@ if __name__ == '__main__':
     print("Now the location is: " + str(current_location))
     #
     # TODO implement better task system
-    task = [[13, 1], [10, 0]]
+    task = [[13, 0], [8,0], [14, 0], [5,0], [12, 0], [2, 0], [1, 0]]
     steps = 0
     while (len(task)) > 0:
         print("Length of the task list: " + str(len(task)))
@@ -155,7 +156,7 @@ if __name__ == '__main__':
             current_location = target_location
             current_room = destination_room
 
-            if (steps % 9) == 0 and steps > 0:
+            if (steps % 15) == 0 and steps > 0:
                 location_info = ping_location()
                 current_location = location_info[0]
                 current_room = location_info[1]
@@ -164,14 +165,15 @@ if __name__ == '__main__':
             print("Current Room: " + str(map_info.convert_room_id(current_room)))
 
         if kill:
-            print("Going to Task")
-            target_location = tasks.task_locator(task[0])
-            vector_x, vector_y, distance = calculate_vector(current_location, target_location)
-            move(vector_x, vector_y, distance)
-            current_location = target_location
-            current_room = destination_room
+            print("Going to Task: " + str(task[0][1]))
+            if task[0][1] == 1:
+                target_location = tasks.task_locator(task[0])
+                vector_x, vector_y, distance = calculate_vector(current_location, target_location)
+                move(vector_x, vector_y, distance)
+                current_location = target_location
+                current_room = destination_room
 
-            tasks.trigger_task(task[0])
+                tasks.trigger_task(task[0])
             task.pop(0)
             kill = False
 
@@ -200,7 +202,6 @@ if __name__ == '__main__':
     # current_location = location_info[0]
     # current_room = location_info[1]
     # navigation.get_a_room(current_location)
-    # tasks.trigger_task("accept_power")
+    # tasks.stabalize_steering()
     # while True:
-    #     print('The current pointer position is {0}'.format(
-    #         mouse.position))
+    #     print('The current pointer position is {0}'.format(mouse.position))
